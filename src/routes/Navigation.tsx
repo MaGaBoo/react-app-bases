@@ -1,50 +1,37 @@
-import * as React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
-import Logo from "../assets/Logo.svg";
+import * as React from "react"
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom"
+import Logo from "../assets/Logo.svg"
+import { LazyPage1, LazyPage2, LazyPage3 } from '../01-lazyLoads/views/index'
 
 export const Navigation = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="main-layout">
         <nav>
           <img src={Logo} alt="React logo" className="logo" />
           <ul>
             <li>
-              <NavLink to="/home" activeClassName="nav-active" exact>
-                Home
-              </NavLink>
+              <NavLink to="/lazy1" className={ ({ isActive}) => isActive ? 'nav-active' : '' }>Lazy1</NavLink>
             </li>
             <li>
-              <NavLink to="/about" activeClassName="nav-active" exact>
-                About
-              </NavLink>
+              <NavLink to="/lazy2" className={ ({ isActive}) => isActive ? 'nav-active' : '' }>Lazy2</NavLink>
             </li>
             <li>
-              <NavLink to="/users" activeClassName="nav-active" exact>
-                Users
-              </NavLink>
+              <NavLink to="/lazy3" className={ ({ isActive}) => isActive ? 'nav-active' : '' }>Lazy3</NavLink>
             </li>
           </ul>
         </nav>
 
-        <Switch>
-          <Route path="about">
-            <h1>About</h1>
+        <Routes>
+          <Route path="lazy1" element={ <LazyPage1 /> }>
           </Route>
-          <Route path="users">
-            <h1>Users</h1>
+          <Route path="lazy2" element={ <LazyPage2 /> }>
           </Route>
-          <Route path="home">
-            <h1>Home</h1>
+          <Route path="lazy3" element={ <LazyPage3 /> }>
           </Route>
           <Route path="/*" />
-        </Switch>
+        </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
